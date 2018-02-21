@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MeteoApp v.0.1</string>
+    <string name="syncronize_data_from_station_and_server">Syncronize data from station and server:</string>
+    <string name="sync">Sync</string>
+    <string name="current_cabinet">Current Cabinet:</string>
+    <string name="sync_status">Sync Status</string>
+    <string name="time_station">Time Station</string>
+    <string name="send_cab">Send cab</string>
+    <string name="send_new_time">Send New Time</string>
+    <string name="textview">TextView</string>
+</resources>
