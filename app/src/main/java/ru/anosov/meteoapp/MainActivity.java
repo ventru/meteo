@@ -463,10 +463,8 @@ public class MainActivity extends AppCompatActivity {
             while (true) {
                 try {
                     // Read from the InputStream
-                    if (buffer[0] != 0) {
-                        bytes = mmInStream.read(buffer);        // Получаем кол-во байт и само собщение в байтовый массив "buffer"
-                        h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();		// Отправляем в очередь сообщений Handler
-                    }
+                    bytes = mmInStream.read(buffer);        // Получаем кол-во байт и само собщение в байтовый массив "buffer"
+                    h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();		// Отправляем в очередь сообщений Handler
                 } catch (IOException e) {
                     break;
                 }
