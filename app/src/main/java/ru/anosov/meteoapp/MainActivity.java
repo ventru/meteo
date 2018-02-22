@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         btButton = findViewById(R.id.btButton);
         lightnessText = findViewById(R.id.LightnessText);
         humidityText = findViewById(R.id.HumidityText);
-        tempText = findViewById(R.id.TempText);
-        cabText = findViewById(R.id.CabText);
+        tempText = findViewById(R.id.tempText);
+        cabText = findViewById(R.id.cabText);
         statusLabel = findViewById(R.id.statusLabel);
         disconnectButton = findViewById(R.id.disconnectButton);
         optionsButton = findViewById(R.id.optionsButton);
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String content){
             Date currentTime = Calendar.getInstance().getTime();
-            statusGetLabel.setText("Synchronized! " + "Last date:" + currentTime + ",values: " + content);
+            statusGetLabel.setText(currentTime + ", " + content);
             String[] contentParse;
             String delimeter = ",";
             contentParse = content.split(delimeter); //todo:NullPointerException at ru.anosov.meteoapp.MainActivity$SendGet.onPostExecute(MainActivity.java:237)
