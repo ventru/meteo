@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     //GUI
     private Button btButton;
-    //private TextView messageLabel;
     private TextView lightnessText;
     private TextView humidityText;
     private TextView tempText;
@@ -79,18 +78,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //initialize GUI
-        btButton = (Button)findViewById(R.id.btButton);
-        lightnessText = (TextView) findViewById(R.id.LightnessText);
-        humidityText = (TextView) findViewById(R.id.HumidityText);
-        tempText = (TextView) findViewById(R.id.TempText);
-        cabText = (TextView) findViewById(R.id.CabText);
-        statusLabel = (TextView) findViewById(R.id.statusLabel);
-        disconnectButton = (Button) findViewById(R.id.disconnectButton);
-        optionsButton = (Button) findViewById(R.id.optionsButton);
-        sendGetButton = (Button) findViewById(R.id.sendGetButton);
-        statusGetLabel = (TextView) findViewById(R.id.statusGetLabel);
-        counterGetLabel = (TextView) findViewById(R.id.counterGetLabel);
-        counterPostLabel = (TextView) findViewById(R.id.counterPostLabel);
+        btButton = findViewById(R.id.btButton);
+        lightnessText = findViewById(R.id.LightnessText);
+        humidityText = findViewById(R.id.HumidityText);
+        tempText = findViewById(R.id.TempText);
+        cabText = findViewById(R.id.CabText);
+        statusLabel = findViewById(R.id.statusLabel);
+        disconnectButton = findViewById(R.id.disconnectButton);
+        optionsButton = findViewById(R.id.optionsButton);
+        sendGetButton = findViewById(R.id.sendGetButton);
+        statusGetLabel = findViewById(R.id.statusGetLabel);
+        counterGetLabel = findViewById(R.id.counterGetLabel);
+        counterPostLabel = findViewById(R.id.counterPostLabel);
         disconnectButton.setEnabled(false);
 
         h = new Handler() {
@@ -100,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
                         byte[] readBuf = (byte[]) msg.obj;
                         String strIncom = new String(readBuf, 0, msg.arg1);
                         sb.append(strIncom);												        // формируем строку
-                        int startOfLineIndex = sb.indexOf("a") + 1;                                 //Находим начало строки
-                        int endOfLineIndex = sb.indexOf("b") - 1;							        // определяем символы конца строки
+                        int startOfLineIndex = sb.indexOf("<") + 1;                                 //Находим начало строки
+                        int endOfLineIndex = sb.indexOf(">") - 1;							    // определяем символы конца строки
                         if (endOfLineIndex > 0) { 						                            // если встречаем конец строки,
                             String sbprint = sb.substring(startOfLineIndex, endOfLineIndex);        // то извлекаем строку
                             sb.delete(0, sb.length());										        // и очищаем sb
@@ -131,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             analyzeData(data[2], data[3], data[1]);
+                            Log.d(TAG, "Данные обработаны");
                             counterGetLabel.setText(String.valueOf(counterGet));
                             counterPostLabel.setText(String.valueOf(counterPost));
                         }
@@ -423,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "...Bluetooth включен...");
             } else {
                 //Prompt user to turn on Bluetooth
-                Intent enableBtIntent = new Intent(btAdapter.ACTION_REQUEST_ENABLE);
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             }
         }
@@ -480,6 +480,7 @@ public class MainActivity extends AppCompatActivity {
                 mmOutStream.write(msgBuffer);
             } catch (IOException e) {
                 Log.d(TAG, "...Ошибка отправки данных: " + e.getMessage() + "...");
+
             }
         }
 
