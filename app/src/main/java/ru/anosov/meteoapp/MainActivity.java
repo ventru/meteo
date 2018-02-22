@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             analyzeData(data[2], data[3], data[1]);
-                            Log.d(TAG, "Данные обработаны");
+                            Log.d(TAG, "...Данные обработаны...");
                             counterGetLabel.setText(String.valueOf(counterGet));
                             counterPostLabel.setText(String.valueOf(counterPost));
                         }
