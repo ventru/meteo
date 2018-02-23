@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         btButton = findViewById(R.id.btButton);
         lightnessText = findViewById(R.id.LightnessText);
         humidityText = findViewById(R.id.HumidityText);
-        tempText = findViewById(R.id.TempText);
-        cabText = findViewById(R.id.CabText);
+        tempText = findViewById(R.id.tempText);
+        cabText = findViewById(R.id.cabText);
         statusLabel = findViewById(R.id.statusLabel);
         disconnectButton = findViewById(R.id.disconnectButton);
         optionsButton = findViewById(R.id.optionsButton);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             analyzeData(data[2], data[3], data[1]);
-                            Log.d(TAG, "Данные обработаны");
+                            Log.d(TAG, "...Данные обработаны...");
                             counterGetLabel.setText(String.valueOf(counterGet));
                             counterPostLabel.setText(String.valueOf(counterPost));
                         }
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String content){
             Date currentTime = Calendar.getInstance().getTime();
-            statusGetLabel.setText("Synchronized! " + "Last date:" + currentTime + ",values: " + content);
+            statusGetLabel.setText(currentTime + ", " + content);
             String[] contentParse;
             String delimeter = ",";
             contentParse = content.split(delimeter); //todo:NullPointerException at ru.anosov.meteoapp.MainActivity$SendGet.onPostExecute(MainActivity.java:237)
@@ -463,9 +463,8 @@ public class MainActivity extends AppCompatActivity {
             while (true) {
                 try {
                     // Read from the InputStream
-                    bytes = mmInStream.read(buffer);		// Получаем кол-во байт и само собщение в байтовый массив "buffer"
+                    bytes = mmInStream.read(buffer);        // Получаем кол-во байт и само собщение в байтовый массив "buffer"
                     h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();		// Отправляем в очередь сообщений Handler
-
                 } catch (IOException e) {
                     break;
                 }
